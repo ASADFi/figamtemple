@@ -44,8 +44,8 @@ export default function individual() {
             <div className="text-slate-500 pt-4 ">For the purpose of industry regulation, your details are required.</div>
 
             <div className="flex flex-col gap-1 pt-3">
-              <TextInput label={"Your fullname*"} placeholder={"Steve Balbar"}></TextInput>
-              <TextInput label={"Email address*"} placeholder={"Enter email address"}></TextInput>
+              <TextInput label={"Your fullname*"} placeholder={"Steve Balbar"} type={""}></TextInput>
+              <TextInput label={"Email address*"} placeholder={"Enter email address"} type={"email"}></TextInput>
               <PasswordInput label="Create password*" placeholder="Enter your password" />
               <span className="text-[#696F79]">
                 I agree to terms & conditions</span>
@@ -53,10 +53,10 @@ export default function individual() {
               <div className="flex flex-col gap-6 pt-3">
                 <CustomButton color="bg-[#1565D8]" text="Register Account" href="/profile" />
                 <div className="text-black flex justify-center items-center">
-  <div className="w-2/5 h-px bg-black"></div>
-  <div className="mx-4">or</div>
-  <div className="w-2/5 h-px bg-black"></div>
-</div>
+                  <div className="w-2/5 h-px bg-black"></div>
+                  <div className="mx-4">or</div>
+                  <div className="w-2/5 h-px bg-black"></div>
+                </div>
                 <div className=" text-slate-900 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 hover:border-blue-500 hover:shadow-lg  ">
                   <CustomLoginButton color={"white"} text={"Register with Google"} href={"/profile"} />
                 </div>

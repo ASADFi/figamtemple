@@ -1,28 +1,23 @@
 "use client"
 import CustomButton from "@/components/ui/button/Button";
 import CountryForm from "@/components/ui/dropdown/DropDown";
-import PhoneSelection from "@/components/ui/phonebar/PhoneBar"
 import TextInput from "@/components/ui/inputbar/InputBar";
+import PhoneInput from "react-phone-number-input";
+import flags from "react-phone-number-input/flags";
 import React, { useState } from 'react';
-
 import Layout from "@/components/ui/layout/Layout";
-import PhoneInputComponent from "@/components/ui/phonebar/PhoneBar";
-
 const countriesList = ['United States', 'Canada', 'France', 'Germany'];
-
-
-
-
-
 const Profile: React.FC = () => {
   const [phone, setPhone] = useState('');
+  const [Value, setValue] = useState('')
 
   const handlePhoneChange = (value: React.SetStateAction<string>) => {
+    console.log('test ', value)
     setPhone(value);
   };
 
 
-  const handleSelectCountry = () => {
+  const onChange = () => {
     console.log('hallo');
   };
 
@@ -48,9 +43,15 @@ const Profile: React.FC = () => {
             <div className="text-slate-500 pt-4 ">For the purpose of industry regulation, your details are required.</div>
             <div className="flex flex-col gap-1 pt-3">
 
-              <PhoneInputComponent value={phone} onChange={handlePhoneChange} label={"Phone number"} />
-            
-              
+
+              <PhoneInput
+                className="block w-full  px-3 py-2 mt-1 text-slate-900 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 hover:border-blue-500 hover:shadow-lg"
+                placeholder="Enter phone number"
+                international
+                defaultCountry="US"
+                value={Value}
+                onChange={onChange}
+              />
               <TextInput label={"Your address"} placeholder={"Please enter address"}></TextInput>
 
 
