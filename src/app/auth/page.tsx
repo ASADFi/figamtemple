@@ -37,7 +37,7 @@ const Profile: React.FC = () => {
           <div className="justify-end flex text-[#BDBDBD] mr-8">STEP 01/03</div>
           <div className="flex justify-between">
             <div className="ml-16 font-semibold text-[#8692A6]">
-              <a href="/individual">&lt; &nbsp; Back</a>
+              <a href="/profile">&lt; &nbsp; Back</a>
             </div>
             <div className="text-[#8692A6] mr-9">Personal Info.</div>
           </div>
@@ -57,7 +57,7 @@ const Profile: React.FC = () => {
               <CountryForm countries={countriesList} placeholder={'Please select'} />
 
               <div className="flex flex-col gap-6 pt-3">
-                <CustomButton color="bg-[#1565D8]" text="Save & Continue" href="/auth" />
+                <CustomButton color="bg-[#1565D8]" text="Save & Continue" href="/individual" />
                 <div className="text-[#8692A6] flex justify-center items-center">
                   <div className="mx-4">Your Info is safely secured</div>
                 </div>
