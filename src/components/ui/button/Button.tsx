@@ -6,13 +6,15 @@ interface CustomButtonProps {
   color: string;
   text: string;
   href: string;
+  onClick: Function;
 }
 
-const CustomButton: React.FC<CustomButtonProps> = ({ color, text, href }) => {
+const CustomButton: React.FC<CustomButtonProps> = ({ color, text, href , onClick}) => {
   const router = useRouter();
 
   const handleClick = () => {
-    router.push(href);
+    // router.push(href);
+    onClick();
   };
 
   return (

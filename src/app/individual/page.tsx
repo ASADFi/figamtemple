@@ -1,19 +1,31 @@
-
+'use client'
 import CustomButton from "@/components/ui/button/Button";
 import CustomLoginButton from "@/components/ui/button/SocilaLoginButtion";
 import IconButton from "@/components/ui/button/SocilaLoginButtion";
 import TextInput from "@/components/ui/inputbar/InputBar";
 import PasswordInput from "@/components/ui/inputbar/PasswordBar";
 import Layout from "@/components/ui/layout/Layout";
+import { useEffect, useState } from "react";
 import { HiOutlineMail } from "react-icons/hi";
-
+import {useRouter} from 'next/navigation';
 
 
 
 export default function individual() {
+  
+  const mr = useRouter();
+
+  const [myFullName, setMyFullName] = useState('');
+  const [myEmail, setMyEmail] = useState('');
+  const [myPassword, setMyPassword] = useState('');
+
+  const storedData = JSON.parse(localStorage.getItem('data'));
 
 
+  useEffect(() => {
 
+    console.log("Fahad my data: ", storedData);
+  }, []);
   function handleClick(): void {
     console.log("Function not implemented.");
   }
@@ -44,14 +56,35 @@ export default function individual() {
             <div className="text-slate-500 pt-4 ">For the purpose of industry regulation, your details are required.</div>
 
             <div className="flex flex-col gap-1 pt-3">
-              <TextInput label={"Your fullname*"} placeholder={"Steve Balbar"} type={""}></TextInput>
-              <TextInput label={"Email address*"} placeholder={"Enter email address"} type={"email"}></TextInput>
-              <PasswordInput label="Create password*" placeholder="Enter your password" />
+              <TextInput label={"Your fullname*"} placeholder={"Steve Balbar"} onValueChange={(obj) => {
+                console.log("fah value change: ", obj.target.value);
+                setMyFullName(obj.target.value);
+              }} type={""}></TextInput>
+              <TextInput label={"Email address*"} placeholder={"Enter email address"} type={"email"} onValueChange={(obj) => {
+                console.log("fah value change: ", obj.target.value);
+                setMyEmail(obj.target.value);
+              }}></TextInput>
+              <PasswordInput label="Create password*" placeholder={"Enter your password"} onValueChange={(obj)=>{
+                console.log("fah value change: ", obj.target.value);
+                setMyPassword(obj.target.value)
+              }}               />
               <span className="text-[#696F79]">
                 I agree to terms & conditions</span>
 
               <div className="flex flex-col gap-6 pt-3">
-                <CustomButton color="bg-[#1565D8]" text="Register Account" href="/profile" />
+                <CustomButton color="bg-[#1565D8]" text="Register Account" href="/profile" onClick={() => {
+                  
+
+                  const newData = {...storedData, 
+                    full_name: myFullName,
+                    email: myEmail ,
+                    password : myPassword
+                  }
+              
+                  localStorage.setItem('data', JSON.stringify(newData));
+
+                  mr.push(`/profile`);
+                }}/>
                 <div className="text-black flex justify-center items-center">
                   <div className="w-2/5 h-px bg-black"></div>
                   <div className="mx-4">or</div>
