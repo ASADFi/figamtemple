@@ -6,9 +6,10 @@ import { HiEye, HiEyeOff } from 'react-icons/hi';
 interface PasswordInputProps {
   label: string;
   placeholder: string;
+  onValueChange: Function;
 }
 
-const PasswordInput: React.FC<PasswordInputProps> = ({ label, placeholder }) => {
+const PasswordInput: React.FC<PasswordInputProps> = ({ label, placeholder ,onValueChange}) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const togglePasswordVisibility = () => {
@@ -26,7 +27,11 @@ const PasswordInput: React.FC<PasswordInputProps> = ({ label, placeholder }) => 
           id="password"
           className="block w-full px-3 py-2 mt-1 border text-slate-800 border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
           placeholder={placeholder}
+          onChange={(obj)=>{
+            onValueChange(obj)
+          }}
         />
+        
         <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
           {showPassword ? (
             <HiEyeOff
@@ -38,6 +43,7 @@ const PasswordInput: React.FC<PasswordInputProps> = ({ label, placeholder }) => 
               className="h-5 w-5 text-gray-400 cursor-pointer"
               onClick={togglePasswordVisibility}
             />
+            
           )}
         </div>
       </div>

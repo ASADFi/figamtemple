@@ -1,30 +1,60 @@
 "use client"
 import CustomButton from "@/components/ui/button/Button";
-import CountryForm from "@/components/ui/dropdown/DropDown";
-
-import TextInput from "@/components/ui/inputbar/InputBar";
-import React, { useState } from 'react';
-
+import React, { useEffect, useState } from 'react';
 import Layout from "@/components/ui/layout/Layout";
+import TextInput from "@/components/ui/inputbar/InputBar";
 
-
-const countriesList = ['United States', 'Canada', 'France', 'Germany'];
-
+import { useRouter } from 'next/navigation';
 
 
 
 
 const Auth: React.FC = () => {
-    const [phone, setPhone] = useState('');
+
+    const storedData = JSON.parse(localStorage.getItem('data'));
+    const mr = useRouter();
+    const [varification, setvarification] = useState('');
 
     const handlePhoneChange = (value: React.SetStateAction<string>) => {
-        setPhone(value);
+        setvarification(value);
     };
 
 
     const handleSelectCountry = () => {
         console.log('hallo');
     };
+    const handleClick = async () => {
+        const newData = { ...storedData, Varification: varification };
+        localStorage.setItem('data', JSON.stringify(newData));
+
+        try {
+            const response = await fetch('http://localhost:3000/api', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(newData),
+            });
+
+            if (response.ok) {
+                mr.push(`/completed`);
+                console.log(newData)
+            } else {
+                // Handle error response
+                console.error('API request failed:', response.statusText);
+            }
+        } catch (error) {
+            // Handle fetch error
+            console.error('Error fetching data:', error);
+        }
+    };
+
+
+
+
+
+
+
 
     return (
         <div className="grid grid-cols-6 md:grid-cols-12 flex-col sm:flex-row min-h-screen bg-white">
@@ -51,13 +81,22 @@ const Auth: React.FC = () => {
 
 
 
-                            <TextInput label={"Bank verification number (BVN)"} placeholder={"090912345567"} type={"varification"}></TextInput>
+                            <TextInput label={"Bank verification number (BVN)"} placeholder={"090912345567"} type={"varification"}
+                                onValueChange={(obj) => {
+                                    console.log("fah value change: ", obj.target.value);
+                                    setvarification(obj.target.value);
+                                }}></TextInput>
 
 
 
 
                             <div className="flex flex-col gap-6 pt-3">
-                                <CustomButton color="bg-[#1565D8]" text="Save & Continue" href="/completed" />
+                                <CustomButton
+                                    color="bg-[#1565D8]"
+                                    text="Register Account"
+                                    href="/auth"
+                                    onClick={handleClick}
+                                />
                                 <div className="text-[#8692A6] flex justify-center items-center">
                                     <div className="mx-4">Your Info is safely secured</div>
                                 </div>
@@ -71,4 +110,12 @@ const Auth: React.FC = () => {
 };
 
 export default Auth;
+
+function setLoading(arg0: boolean) {
+    throw new Error("Function not implemented.");
+}
+
+function setPortfolioData(data: any) {
+    throw new Error("Function not implemented.");
+}
 
