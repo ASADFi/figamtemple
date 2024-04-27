@@ -5,7 +5,7 @@ import IconButton from "@/components/ui/button/SocilaLoginButtion";
 import TextInput from "@/components/ui/inputbar/InputBar";
 import PasswordInput from "@/components/ui/inputbar/PasswordBar";
 import Layout from "@/components/ui/layout/Layout";
-import { useEffect, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import { HiOutlineMail } from "react-icons/hi";
 import {useRouter} from 'next/navigation';
 
@@ -19,7 +19,15 @@ export default function individual() {
   const [myEmail, setMyEmail] = useState('');
   const [myPassword, setMyPassword] = useState('');
 
-  const storedData = JSON.parse(localStorage.getItem('data'));
+  const [storedData, setStoredData] = useState({});
+useEffect(() => {
+  if (typeof window !== 'undefined') {
+    const data = localStorage.getItem('data');
+    setStoredData(data ? JSON.parse(data) : {});
+  }
+}, []);
+  // Use storedData here
+  
 
 
   useEffect(() => {
@@ -56,15 +64,15 @@ export default function individual() {
             <div className="text-slate-500 pt-4 ">For the purpose of industry regulation, your details are required.</div>
 
             <div className="flex flex-col gap-1 pt-3">
-              <TextInput label={"Your fullname*"} placeholder={"Steve Balbar"} onValueChange={(obj) => {
+              <TextInput label={"Your fullname*"} placeholder={"Steve Balbar"} onValueChange={(obj: { target: { value: SetStateAction<string>; }; }) => {
                 console.log("fah value change: ", obj.target.value);
                 setMyFullName(obj.target.value);
               }} type={""}></TextInput>
-              <TextInput label={"Email address*"} placeholder={"Enter email address"} type={"email"} onValueChange={(obj) => {
+              <TextInput label={"Email address*"} placeholder={"Enter email address"} type={"email"} onValueChange={(obj: { target: { value: SetStateAction<string>; }; }) => {
                 console.log("fah value change: ", obj.target.value);
                 setMyEmail(obj.target.value);
               }}></TextInput>
-              <PasswordInput label="Create password*" placeholder={"Enter your password"} onValueChange={(obj)=>{
+              <PasswordInput label="Create password*" placeholder={"Enter your password"} onValueChange={(obj: { target: { value: SetStateAction<string>; }; })=>{
                 console.log("fah value change: ", obj.target.value);
                 setMyPassword(obj.target.value)
               }}               />

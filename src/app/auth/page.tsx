@@ -11,7 +11,17 @@ import { useRouter } from 'next/navigation';
 
 const Auth: React.FC = () => {
 
-    const storedData = JSON.parse(localStorage.getItem('data'));
+    const [storedData, setStoredData] = useState({});
+useEffect(() => {
+  if (typeof window !== 'undefined') {
+    const data = localStorage.getItem('data');
+    setStoredData(data ? JSON.parse(data) : {});
+  }
+}, []);
+    // Use storedData here
+    
+// Use storedData here (might be undefined if data is missing)
+
     const mr = useRouter();
     const [varification, setvarification] = useState('');
 
@@ -82,7 +92,7 @@ const Auth: React.FC = () => {
 
 
                             <TextInput label={"Bank verification number (BVN)"} placeholder={"090912345567"} type={"varification"}
-                                onValueChange={(obj) => {
+                                onValueChange={(obj: { target: { value: React.SetStateAction<string>; }; }) => {
                                     console.log("fah value change: ", obj.target.value);
                                     setvarification(obj.target.value);
                                 }}></TextInput>

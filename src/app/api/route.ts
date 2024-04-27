@@ -12,9 +12,9 @@ export async function POST(request: Request) {
   console.log("UserData", params);
 
   // Destructuring assignment for cleaner code
-  const { fullName, email, password, phone_number,address , country  } = params;
+  const { full_name, email, password, phone_number,address , country  } = params;
 
-  if (!fullName) {
+  if (!full_name) {
     return NextResponse.json({ message: "Full name is required." });
   }
 
@@ -22,7 +22,7 @@ export async function POST(request: Request) {
     // Use prepared statement and parameter values for security
     const result = await pool.query(
       "INSERT INTO users (full_name, email, password, phone_number, country, address) VALUES ($1, $2, $3, $4, $5, $6)",
-      [fullName, email, password, phone_number, country, address]
+      [full_name, email, password, phone_number, country, address]
     );
 
     console.log("result", result);

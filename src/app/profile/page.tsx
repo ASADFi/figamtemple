@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import CustomButton from "@/components/ui/button/Button";
 import CountryForm from "@/components/ui/dropdown/DropDown";
 // import TextInput from "@/components/ui/inputbar/InputBar";
@@ -11,28 +11,26 @@ import TextInput from "@/components/ui/inputbar/InputBar";
 
 const countriesList = ['United States', 'Canada', 'France', 'Germany'];
 
-const Profile: React.FC = () => {
-
-  const router = useRouter();
-
-
-  const [country, setcountry] = useState('');
+const Profile = () => {
+   const [country, setcountry] = useState('');
   const [address, setMyAddress] = useState('');
   const [Value, setValue] = useState('');
-  const storedData = JSON.parse(localStorage.getItem('data'));
-
+  
+  const [storedData, setStoredData] = useState({});
+useEffect(() => {
+  if (typeof window !== 'undefined') {
+    const data = localStorage.getItem('data');
+    setStoredData(data ? JSON.parse(data) : {});
+  }
+}, []); // '{}' as default
   const mr = useRouter();
-
   // const handlePhoneChange = (value: React.SetStateAction<string>) => {
   //   console.log('test ', value)
   //   setPhone(value);
   // };
-
-
   const onChange = () => {
     console.log('hallo');
   };
-
   useEffect(() => {
 
     console.log("Fahad next Page STate: ", storedData);
@@ -68,31 +66,37 @@ const Profile: React.FC = () => {
                 value={Value}
                 onChange={onChange}
               />
-              <TextInput label={"Your address"} placeholder={"Please enter address"} onValueChange={(obj) => {
+              <TextInput label={"Your address"} placeholder={"Please enter address"} onValueChange={(obj: { target: { value: React.SetStateAction<string>; }; }) => {
                 console.log("fah value change: ", obj.target.value);
                 setMyAddress(obj.target.value);
-              } } type={""}></TextInput>
+              }} type={""}></TextInput>
 
 
-              <CountryForm countries={countriesList} placeholder={'Please select'} onValueChange={(obj) => {
+              <CountryForm countries={countriesList} placeholder={'Please select'} onValueChange={(obj: { target: { value: React.SetStateAction<string>; }; }) => {
                 console.log("fah value change: ", obj.target.value);
                 setcountry(obj.target.value);
-              } } />
+              }} />
 
               <div className="flex flex-col gap-6 pt-3">
-                <CustomButton color="bg-[#1565D8]" text="Save & Continue" href="/auth" onClick={() => {
-                  
 
-                  const newData = {...storedData, 
-                    address: address,
-                    country: country ,
-                   
-                  }
-              
-                  localStorage.setItem('data', JSON.stringify(newData));
+                <CustomButton color="bg-[#1565D8]" text="Save & Continue" href="/auth"
+                  onClick={() => {
 
-                  mr.push(`/auth`)}}
-                   />
+
+                    const newData = {
+                      ...storedData,
+                      address: address,
+                      country: country,
+
+                    }
+
+                    localStorage.setItem('data', JSON.stringify(newData));
+
+                    mr.push(`/auth`)
+                  }}
+                />
+
+
                 <div className="text-[#8692A6] flex justify-center items-center">
                   <div className="mx-4">Your Info is safely secured</div>
                 </div>

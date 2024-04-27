@@ -22,6 +22,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/components/ui/dropdown/DropDown.js", "src/hooks/fatchdat.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/components/ui/dropdown/DropDown.js", "src/hooks/fatchdat.js", "src/app/profile/page.jsx"],
   "exclude": ["node_modules"]
 }
