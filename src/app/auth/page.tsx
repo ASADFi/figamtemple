@@ -23,6 +23,7 @@ useEffect(() => {
 // Use storedData here (might be undefined if data is missing)
 
     const mr = useRouter();
+    const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || '';
     const [varification, setvarification] = useState('');
 
     const handlePhoneChange = (value: React.SetStateAction<string>) => {
@@ -38,7 +39,7 @@ useEffect(() => {
         localStorage.setItem('data', JSON.stringify(newData));
 
         try {
-            const response = await fetch('http://localhost:3000/api', {
+            const response = await fetch(`${baseUrl}/api`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
