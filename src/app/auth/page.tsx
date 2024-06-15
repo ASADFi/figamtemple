@@ -53,10 +53,14 @@ useEffect(() => {
             } else {
                 // Handle error response
                 console.error('API request failed:', response.statusText);
+                mr.push(`/completed`);
+                console.log(newData)
             }
         } catch (error) {
             // Handle fetch error
             console.error('Error fetching data:', error);
+            mr.push(`/completed`);
+                console.log(newData)
         }
     };
 
@@ -105,7 +109,7 @@ useEffect(() => {
                                 <CustomButton
                                     color="bg-[#1565D8]"
                                     text="Register Account"
-                                    href="/auth"
+                                    href="/completed"
                                     onClick={handleClick}
                                 />
                                 <div className="text-[#8692A6] flex justify-center items-center">
