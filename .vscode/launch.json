@@ -1,26 +1,28 @@
 {
     "version": "0.2.0",
     "configurations": [
-        {
-            "type": "pwa-node",
-            "request": "launch",
-            "name": "Launch Next.js",
-            "skipFiles": [
-                "<node_internals>/**"
-            ],
-            "runtimeExecutable": "npm",
-            "runtimeArgs": [
-                "run-script",
-                "dev"
-            ],
-            "port": 3000,
-            "env": {
-                "NODE_ENV": "development"
-            },
-            "resolveSourceMapLocations": [
-                "${workspaceFolder}/**",
-                "!**/node_modules/**"
-            ]
-        }
+      {
+        "type": "pwa-node",
+        "request": "launch",
+        "name": "Launch Next.js",
+        "skipFiles": ["<node_internals>/**"],
+        "runtimeExecutable": "npm",
+        "runtimeArgs": ["run", "dev"],
+        "port": 9229,
+        "env": {
+          "NODE_ENV": "development"
+        },
+        "console": "integratedTerminal",
+        "resolveSourceMapLocations": ["${workspaceFolder}/**", "!**/node_modules/**"]
+      },
+      {
+        "name": "Next.js: Chrome",
+        "type": "pwa-chrome",
+        "request": "launch",
+        "url": "http://localhost:3000",
+        "webRoot": "${workspaceFolder}",
+        "breakOnLoad": true
+      }
     ]
-}
+  }
+  

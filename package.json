@@ -6,13 +6,15 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "dev:inspect": "node --inspect-brk node_modules/.bin/next dev"
   },
   "dependencies": {
     "body-parser": "^1.20.2",
     "express": "^4.19.2",
     "firebase": "^10.11.1",
     "mysql": "^2.18.1",
+    "mysql2": "^3.10.1",
     "next": "14.2.2",
     "next-connect": "^1.0.0",
     "pg": "^8.11.5",
