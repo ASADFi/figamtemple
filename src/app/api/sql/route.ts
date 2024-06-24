@@ -50,7 +50,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ message: "User data stored successfully.", result }, { status: 201 });
   } catch (error) {
     console.log("API Exception catch: ", error);
-    return NextResponse.json({ message:"Faild to use this data" }, { status: 500 });
+    return NextResponse.json({ message: error }, { status: 500 });
   }
 }
 
