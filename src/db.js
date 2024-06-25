@@ -46,7 +46,7 @@ const con = mysql.createConnection({
   user: process.env.USER_NAME,
   password: process.env.PASSWORD,
   database: process.env.DB_NAME,
-  port: process.env.PORT, // or your database port
+  port: 3306 // or your database port
 });
 
 con.connect(function (err) {
